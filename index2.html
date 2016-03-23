@@ -5,11 +5,15 @@
     <title>Open Source Tools</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <!--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    -->
     <style type="text/css">
       .goal_img {
         max-width: 15%;
+        cursor: pointer;
+        cursor: hand;
       }
       .entry_img {
         max-width: 150px;
@@ -47,14 +51,28 @@
         },
       });
 
-// <img class="goal_img goal_action" src="E_SDG_Icons-01-grayscale.jpg"
-//   data-disabled-image="E_SDG_Icons-01-grayscale.jpg"
-//   data-enabled-image="E_SDG_Icons-01.jpg" data-state="inactive"
-//   data-goal="1. No Poverty">
       var GoalList = React.createClass({
         render: function() {
           return (
-            <GoalItem goal="1. No Poverty" image="sdg-icon-01" />
+            <div>
+              <GoalItem image="sdg-icon-01" goal="1. No Poverty" />
+              <GoalItem image="sdg-icon-02" goal="2. Zero Hunger" />
+              <GoalItem image="sdg-icon-03" goal="3. Good Health and Well-Being" />
+              <GoalItem image="sdg-icon-04" goal="4. Quality Education" />
+              <GoalItem image="sdg-icon-05" goal="5. Gender Equality" />
+              <GoalItem image="sdg-icon-06" goal="6. Clean Water and Sanitation" />
+              <GoalItem image="sdg-icon-07" goal="7. Affordable and Clean Energy" />
+              <GoalItem image="sdg-icon-08" goal="8. Decent Work and Economic Growth" />
+              <GoalItem image="sdg-icon-09" goal="9. Industry, Innovation and Infrastructure" />
+              <GoalItem image="sdg-icon-10" goal="10. Reduced Inequalities" />
+              <GoalItem image="sdg-icon-11" goal="11. Sustainable Cities and Communities" />
+              <GoalItem image="sdg-icon-12" goal="12. Responsible Consumption and Production" />
+              <GoalItem image="sdg-icon-13" goal="13. Climate Action" />
+              <GoalItem image="sdg-icon-14" goal="14. Life Below Water" />
+              <GoalItem image="sdg-icon-15" goal="15. Life on Land" />
+              <GoalItem image="sdg-icon-16" goal="16. Peace, Justice and Strong Institutions" />
+              <GoalItem image="sdg-icon-17" goal="17. Partnerships for the Goals" />
+            </div>
           );
         },
       });
