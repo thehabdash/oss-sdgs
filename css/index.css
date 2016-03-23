@@ -1,0 +1,10 @@
+.goal_img {
+  max-width: 15%;
+  cursor: pointer;
+  cursor: hand;
+}
+.entry_img {
+  max-width: 150px;
+  float: left;
+  margin: 10px;
+}

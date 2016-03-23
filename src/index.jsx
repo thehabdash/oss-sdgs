@@ -75,9 +75,7 @@ var SearchBar = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     var textQuery = this.state.textQuery.trim();
-    var goalsQuery = this.state.goalsQuery.join('|');
-    // console.log({textQuery: textQuery, goalsQuery: goalsQuery});
-    // TODO: enable this to bubble submission up to main form for searching
+    var goalsQuery = this.state.goalsQuery;
     this.props.onSearch({textQuery: textQuery, goalsQuery: goalsQuery});
   },
   handleGoalsChange: function(goals) {
@@ -102,24 +100,46 @@ var SearchBar = React.createClass({
 
 var ProjectList = React.createClass({
   render: function() {
+    // TODO: replace this with ProjectRow 
+    var projectNodes = this.props.projects.map(function(project) {
+      return (
+        <div>{project["Project Name"]}</div>
+      );
+    }.bind(this));
     return (
       <div>
-        words
+        {projectNodes}
       </div>
     );
   },
 });
 
 var OpenSourceGoalsTable = React.createClass({
+  getInitialState: function() {
+    return {projects: []}
+  },
+  onAjaxComplete: function(data, two, three) {
+    this.setState({projects: data.params.entries})
+  },
   handleSearch: function(params) {
-    console.log("You did a search!")
-    console.log(params);
+    // TODO create a loading spinner
+    // TODO add a label to the blockspring query to make the column names more js-friendly
+    return blockspring.runParsed("open-source-sdgs-api",
+      {
+        search_text: params.textQuery,
+        limit: 10,
+        offset: 0,
+        goals: params.goalsQuery.join("|")
+      },
+      { "api_key": "br_27539_53bd348e35991a59949c1e737485bc7210f036d7" },
+      this.onAjaxComplete
+    );
   },
   render: function() {
     return (
       <div>
         <SearchBar onSearch={this.handleSearch} goals={this.props.goals} />
-        <ProjectList projects={this.props.projects} />
+        <ProjectList projects={this.state.projects} />
       </div>
     );
   },
