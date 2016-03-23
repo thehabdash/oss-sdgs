@@ -1,0 +1,118 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://cdn.blockspring.com/blockspring.js"></script>
+  <style type="text/css">
+    .goal_img {
+      max-width: 15%;
+    }
+    .entry_img {
+      max-width: 150px;
+      float: left;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="search">
+    <input type="text" id="search_box" />
+    <input id="search_button" type="submit" value="submit" />
+  </div>
+
+  <div id="goals">
+    <img class="goal_img goal_action" src="E_SDG_Icons-01-grayscale.jpg" data-disabled-image="E_SDG_Icons-01-grayscale.jpg" data-enabled-image="E_SDG_Icons-01.jpg" data-state="inactive" data-goal="1. No Poverty">
+    <img class="goal_img goal_action" src="E_SDG_Icons-02-grayscale.jpg" data-disabled-image="E_SDG_Icons-02-grayscale.jpg" data-enabled-image="E_SDG_Icons-02.jpg" data-state="inactive" data-goal="2. Zero Hunger">
+    <img class="goal_img goal_action" src="E_SDG_Icons-03-grayscale.jpg" data-disabled-image="E_SDG_Icons-03-grayscale.jpg" data-enabled-image="E_SDG_Icons-03.jpg" data-state="inactive" data-goal="3. Good Health and Well-Being">
+    <img class="goal_img goal_action" src="E_SDG_Icons-04-grayscale.jpg" data-disabled-image="E_SDG_Icons-04-grayscale.jpg" data-enabled-image="E_SDG_Icons-04.jpg" data-state="inactive" data-goal="4. Quality Education">
+    <img class="goal_img goal_action" src="E_SDG_Icons-05-grayscale.jpg" data-disabled-image="E_SDG_Icons-05-grayscale.jpg" data-enabled-image="E_SDG_Icons-05.jpg" data-state="inactive" data-goal="5. Gender Equality">
+    <img class="goal_img goal_action" src="E_SDG_Icons-06-grayscale.jpg" data-disabled-image="E_SDG_Icons-06-grayscale.jpg" data-enabled-image="E_SDG_Icons-06.jpg" data-state="inactive" data-goal="6. Clean Water and Sanitation">
+    <img class="goal_img goal_action" src="E_SDG_Icons-07-grayscale.jpg" data-disabled-image="E_SDG_Icons-07-grayscale.jpg" data-enabled-image="E_SDG_Icons-07.jpg" data-state="inactive" data-goal="7. Affordable and Clean Energy">
+    <img class="goal_img goal_action" src="E_SDG_Icons-08-grayscale.jpg" data-disabled-image="E_SDG_Icons-08-grayscale.jpg" data-enabled-image="E_SDG_Icons-08.jpg" data-state="inactive" data-goal="8. Decent Work and Economic Growth">
+    <img class="goal_img goal_action" src="E_SDG_Icons-09-grayscale.jpg" data-disabled-image="E_SDG_Icons-09-grayscale.jpg" data-enabled-image="E_SDG_Icons-09.jpg" data-state="inactive" data-goal="9. Industry, Innovation and Infrastructure">
+    <img class="goal_img goal_action" src="E_SDG_Icons-10-grayscale.jpg" data-disabled-image="E_SDG_Icons-10-grayscale.jpg" data-enabled-image="E_SDG_Icons-10.jpg" data-state="inactive" data-goal="10. Reduced Inequalities">
+    <img class="goal_img goal_action" src="E_SDG_Icons-11-grayscale.jpg" data-disabled-image="E_SDG_Icons-11-grayscale.jpg" data-enabled-image="E_SDG_Icons-11.jpg" data-state="inactive" data-goal="11. Sustainable Cities and Communities">
+    <img class="goal_img goal_action" src="E_SDG_Icons-12-grayscale.jpg" data-disabled-image="E_SDG_Icons-12-grayscale.jpg" data-enabled-image="E_SDG_Icons-12.jpg" data-state="inactive" data-goal="12. Responsible Consumption and Production">
+    <img class="goal_img goal_action" src="E_SDG_Icons-13-grayscale.jpg" data-disabled-image="E_SDG_Icons-13-grayscale.jpg" data-enabled-image="E_SDG_Icons-13.jpg" data-state="inactive" data-goal="13. Climate Action">
+    <img class="goal_img goal_action" src="E_SDG_Icons-14-grayscale.jpg" data-disabled-image="E_SDG_Icons-14-grayscale.jpg" data-enabled-image="E_SDG_Icons-14.jpg" data-state="inactive" data-goal="14. Life Below Water">
+    <img class="goal_img goal_action" src="E_SDG_Icons-15-grayscale.jpg" data-disabled-image="E_SDG_Icons-15-grayscale.jpg" data-enabled-image="E_SDG_Icons-15.jpg" data-state="inactive" data-goal="15. Life on Land">
+    <img class="goal_img goal_action" src="E_SDG_Icons-16-grayscale.jpg" data-disabled-image="E_SDG_Icons-16-grayscale.jpg" data-enabled-image="E_SDG_Icons-16.jpg" data-state="inactive" data-goal="16. Peace, Justice and Strong Institutions">
+    <img class="goal_img goal_action" src="E_SDG_Icons-17-grayscale.jpg" data-disabled-image="E_SDG_Icons-17-grayscale.jpg" data-enabled-image="E_SDG_Icons-17.jpg" data-state="inactive" data-goal="17. Partnerships for the Goals">
+    <img class="goal_img" src="E_SDG_Icons-18-grayscale.jpg">
+  </div>
+  <div id="container"></div>
+
+  <script id="entry-template" type="text/x-handlebars-template">
+    <div class="entry">
+      <h1>{{title}}</h1>
+      <div class="entry_description">
+        <img class="entry_img" src="{{img_source}}" />
+        <p>{{description}}</p>
+        <p><a href="{{demo_url}}">Learn More</a> | <a href="{{repo_url}}">GitHub Source</a></p>
+        <p><strong>Goals:</strong> {{tags}}</p>
+      </div>
+    </div>
+  </script>
+
+  <script>
+    var template = Handlebars.compile($("#entry-template").html());
+    var goals = [];
+
+    function displayResults(response) {
+      $("#container").html("");
+      var data = response.params["entries"];
+      //console.log(response.params);
+      data.forEach(function(entry, index) {
+        var context = {
+          title: entry["Project Name"],
+          description: entry["Description"],
+          img_source: entry["Image URL"],
+          tags: entry["Related SDGs"],
+          demo_url: entry["Demo or Website URL"],
+          repo_url: entry["Code Repository URL"],
+        };
+
+        $("#container").append(template(context));
+      });
+    };
+
+    function loadData() {
+      $("#container").html("<img src='images/loading_spinner.gif'>");
+
+      return blockspring.runParsed("open-source-sdgs-api",
+        {
+          search_text: $("#search_box").val(),
+          limit: 10,
+          offset: 0,
+          goals: goals.join("|")
+        },
+        { "api_key": "br_27539_53bd348e35991a59949c1e737485bc7210f036d7" },
+        displayResults
+      );
+    }
+
+    function adjustGoals(e) {
+      var item = $(e.target);
+      if (item.data("state") === "inactive") {
+        goals.push(item.data("goal"));
+        item.attr("src", item.data("enabled-image"));
+        item.data("state", "active");
+      } else {
+        goals.splice(goals.indexOf(item.data("goal")), 1);
+        item.attr("src", item.data("disabled-image"));
+        item.data("state", "inactive");
+      }
+    //  console.log(goals);
+    }
+
+    $(document).ready(function() {
+      $("#search_button").click(loadData);
+      $(".goal_action").click(adjustGoals);
+      loadData();
+    });
+  </script>
+</body>
+</html>
