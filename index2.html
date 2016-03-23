@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Open Source Tools</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <style type="text/css">
+      .goal_img {
+        max-width: 15%;
+      }
+      .entry_img {
+        max-width: 150px;
+        float: left;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type="text/babel">
+      // OpenSourceGoalsTable
+      //   -- SearchBar
+      //     -- GoalList
+      //       -- GoalItem
+      //   -- ProjectList
+      //     -- ProjectRow
+
+      var GoalItem = React.createClass({
+        getInitialState: function() {
+          return {active: false}
+        },
+        handleClick: function() {
+          this.setState({active: !this.state.active});
+        },
+        render: function() {
+          var image_state = (this.state.active) ? 'color' : 'grayscale';
+          return (
+            <img
+              onClick={this.handleClick}
+              className="goal_img"
+              src={"images/" + this.props.image + "-" + image_state + ".jpg"}
+              alt={this.props.goal} />
+          );
+        },
+      });
+
+// <img class="goal_img goal_action" src="E_SDG_Icons-01-grayscale.jpg"
+//   data-disabled-image="E_SDG_Icons-01-grayscale.jpg"
+//   data-enabled-image="E_SDG_Icons-01.jpg" data-state="inactive"
+//   data-goal="1. No Poverty">
+      var GoalList = React.createClass({
+        render: function() {
+          return (
+            <GoalItem goal="1. No Poverty" image="sdg-icon-01" />
+          );
+        },
+      });
+
+      var SearchBar = React.createClass({
+        render: function() {
+          return (
+            <div id="search_bar">
+              <form>
+                <input type="text" placeholder="Search..." />
+                <input type="submit" />
+              </form>
+              <GoalList />
+            </div>
+          );
+        },
+      });
+
+      var ProjectList = React.createClass({
+        render: function() {
+          return (
+            <div>
+              words
+            </div>
+          );
+        },
+      });
+
+      var OpenSourceGoalsTable = React.createClass({
+        render: function() {
+          return (
+            <div>
+              <SearchBar />
+              <ProjectList projects={this.props.projects} />
+            </div>
+          );
+        },
+      });
+
+      var projects = [{}]
+
+      ReactDOM.render(
+        <OpenSourceGoalsTable projects={projects} />,
+        document.getElementById("container")
+      );
+      // To get started with this tutorial running your own code, simply remove
+      // the script tag loading scripts/example.js and start writing code here.
+    </script>
+  </body>
+</html>
