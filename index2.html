@@ -105,7 +105,7 @@
           var goalsQuery = this.state.goalsQuery.join('|');
           // console.log({textQuery: textQuery, goalsQuery: goalsQuery});
           // TODO: enable this to bubble submission up to main form for searching
-          // this.props.onSubmit({textQuery: textQuery, goalsQuery: goalsQuery});
+          this.props.onSearch({textQuery: textQuery, goalsQuery: goalsQuery});
         },
         handleGoalsChange: function(goals) {
           this.setState({goalsQuery: goals});
@@ -138,10 +138,14 @@
       });
 
       var OpenSourceGoalsTable = React.createClass({
+        handleSearch: function(params) {
+          console.log("You did a search!")
+          console.log(params);
+        },
         render: function() {
           return (
             <div>
-              <SearchBar goals={this.props.goals} />
+              <SearchBar onSearch={this.handleSearch} goals={this.props.goals} />
               <ProjectList projects={this.props.projects} />
             </div>
           );
