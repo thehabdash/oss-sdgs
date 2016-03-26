@@ -98,16 +98,45 @@ var SearchBar = React.createClass({
   },
 });
 
+var ProjectRow = React.createClass({
+  render: function() {
+    return (
+      <div className="entry">
+        <h1>{this.props.project.title}</h1>
+        <div className="entry_description">
+          <img className="entry_img" src={this.props.project.img_source} />
+          <p>{this.props.project.description}</p>
+          <p>
+            <a href={this.props.project.demo_url}>Learn More</a> |&nbsp;
+            <a href={this.props.project.repo_url}>GitHub Source</a>
+          </p>
+          <p>
+            <strong>Goals:&nbsp;</strong>
+            {this.props.project.tags}
+          </p>
+        </div>
+      </div>
+    );
+  },
+});
+
 var ProjectList = React.createClass({
   render: function() {
-    // TODO: replace this with ProjectRow 
-    var projectNodes = this.props.projects.map(function(project) {
+    var projectNodes = this.props.projects.map(function(project, key) {
+      var context = {
+        title: project["Project Name"],
+        description: project["Description"],
+        img_source: project["Image URL"],
+        tags: project["Related SDGs"],
+        demo_url: project["Demo or Website URL"],
+        repo_url: project["Code Repository URL"],
+      };
       return (
-        <div>{project["Project Name"]}</div>
+        <ProjectRow key={key} project={context} />
       );
     }.bind(this));
     return (
-      <div>
+      <div id="projectList">
         {projectNodes}
       </div>
     );
