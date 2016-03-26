@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "",
   "main": "index.js",
+  "repository": "https://github.com/bbugh/oss-sdgs",
   "dependencies": {
     "babel-preset-react": "^6.5.0"
   },
