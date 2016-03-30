@@ -1,0 +1,18 @@
+{
+  "name": "oss-sdgs",
+  "version": "0.2.0",
+  "description": "Sustainable Development Goals sharing tool",
+  "main": "build/index.js",
+  "repository": "https://github.com/bbugh/oss-sdgs",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-preset-react": "^6.5.0"
+  },
+  "scripts": {
+    "watch": "babel src --presets react --out-dir build --watch",
+    "build": "babel src --presets react --out-dir build"
+  },
+  "author": "bbugh",
+  "license": "ISC"
+}
